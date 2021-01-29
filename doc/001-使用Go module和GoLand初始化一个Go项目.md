@@ -89,7 +89,7 @@ hello pkslow
 
 ## 引入本地包
 
-![image](doc/a1b2.jpg)
+![image](goland-proxy.png)
 
 
 
