@@ -1,35 +1,77 @@
 package main
+
 //结构演示 struct
+//结构也是一种类型，同种类型可以进行相关的赋值
 import "fmt"
 
-func main() {
-	a := test{}
-	fmt.Println(a)
-	a1 := persion{}
-	//赋值初始化
-	a1.name = "jone"
-	a1.age = 12
-	fmt.Println(a1)
+type persion1 struct {
+	Name string
+	age  int
+}
 
-	//字面值的初始化
-	a2 := persion{name: "aaa", age: 34}
-	fmt.Println(a2)
+func initStruct() {
+	var persion11 persion1
+	persion11.age = 11
+	persion11.Name = "xiaoming"
+	fmt.Println(persion11)
+	persion12 := persion1{Name: "xiaoji", age: 18}
+	fmt.Println(persion12)
+}
+
+func Propagation(p persion1) {
+	p.age = 99
+	fmt.Println(p)
+}
+
+func AddressPass(p *persion1) {
+	p.age = 99
+	fmt.Println(p)
+}
+
+type PersionNiming struct {
+	Name string
+	Age  int
+	Contact struct{
+		Phone string
+		Address string
+	}
+}
+
+func main() {
+	fmt.Println("初始化结构体")
+	initStruct()
 
 	//结构也是一个值类型,是值拷贝
-	A(a2)
-	fmt.Println(a2)
+	fmt.Println("值传递验证")
+	initPersion1 := persion1{Name: "xiaoji", age: 18}
+	Propagation(initPersion1)
+	fmt.Println(initPersion1)
 
-	//进行指针传递，修改会导致原先类修改
-	P(&a2)
-	fmt.Println(a2)
+	fmt.Println("地址传递验证")
+	initPersionAddress := persion1{Name: "xiaoji", age: 18}
+	AddressPass(&initPersionAddress)
+	fmt.Println(initPersionAddress)
 
-	//指针类型的初始化
-	fmt.Println("指针类型的初始化")
-	a3 := &persion{name: "aaa", age: 34}
-	fmt.Println(a3)
-	P(a3)
-	a3.name = "icu"
-	fmt.Println(a3)
+	fmt.Println("多次地址传递，可将类声明为结构指针类型，")
+	PersionAddress := &persion1{Name: "xiaoji", age: 18}
+	AddressPass(PersionAddress)
+	fmt.Println(PersionAddress)
+
+	fmt.Println("匿名函数展示")
+	aPersion := struct {
+		Name string
+		age  int
+	}{
+		Name: "23323",
+		age:  345,
+	}
+	fmt.Println(aPersion)
+	niming := PersionNiming{Name: "xiaoji", Age: 18}
+	niming.Contact.Phone = "110"
+	niming.Contact.Address= "66666666"
+	fmt.Println(niming)
+
+	fmt.Println("======================================")
 
 	//匿名结构
 	nimingjiegou()
@@ -39,14 +81,14 @@ func main() {
 }
 
 func superNimingHanShu() {
-	a:=student{}
+	a := student{}
 	a.age = 17
 	a.name = "xiaoli"
 	a.contract.city = "shanghai"
 	a.contract.phone = "110"
-	a.persion.name = "100"
-	a.persion.age = 100
-	a.age =1000
+	a.person.name = "100"
+	a.person.age = 100
+	a.age = 1000
 	fmt.Println(a)
 }
 
@@ -57,7 +99,7 @@ type student struct {
 		city  string
 		phone string
 	}
-	persion
+	person
 }
 
 func nimingjiegou() {
@@ -68,20 +110,19 @@ func nimingjiegou() {
 	fmt.Println(a)
 }
 
-type test struct {
-}
 
-type persion struct {
+
+type person struct {
 	name string
 	age  int
 }
 
-func A(per persion) {
+func A(per person) {
 	per.age = 100
 	fmt.Println(per)
 }
 
-func P(per *persion) {
+func P(per *person) {
 	per.age = 101
 	fmt.Println(per)
 }
