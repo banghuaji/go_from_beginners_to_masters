@@ -20,7 +20,7 @@ var a, b, c = "a1", "b1", "c1"
 func main() {
 
 	fmt.Println(a)
-	fmt.Println(a.StringVar(a))
+	fmt.Println(StringVar(a))
 	fmt.Println(small)
 	fmt.Println(small2)
 
@@ -39,4 +39,8 @@ func main() {
 	fmt.Println(time.Now().AddDate(0, 0, 1).Format(time.RFC850))
 
 	fmt.Println(main2.Nowtime().Add(1))
+}
+
+func StringVar(s string) string {
+	return  s
 }
