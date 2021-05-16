@@ -12,8 +12,8 @@ func BeginnersToMaster(str string) {
 
 	var (
 		qq string = "abcd"
-		ee string = "abcd"
-		tt string = "abcd"
+		//ee string = "abcd"
+		//tt string = "abcd"
 	)
 	fmt.Println(qq)
 
